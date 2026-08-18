@@ -274,15 +274,3 @@ exception/    custom exceptions and the @RestControllerAdvice
 
 `EligibilityService` holds the lending rules and has no repository dependencies,
 so the rules are unit tested on their own without a database.
-
-## Limitations
-
-Things I left out on purpose, to keep the project small enough to understand
-completely:
-
-- No authentication. Callers pass user ids directly.
-- Repayments are all-or-nothing per instalment. No partial payment, no
-  prepayment, no late fees.
-- Offers never expire.
-- The eligibility rule is a fixed income multiple, not a credit score.
-- No UPI, Aadhaar, credit bureau, or any real disbursal.
