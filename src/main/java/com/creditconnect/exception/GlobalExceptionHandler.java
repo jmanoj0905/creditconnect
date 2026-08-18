@@ -26,12 +26,6 @@ public class GlobalExceptionHandler {
         return build(HttpStatus.CONFLICT, ex.getMessage(), request);
     }
 
-    @ExceptionHandler(IneligibleApplicantException.class)
-    public ResponseEntity<ApiError> handleIneligible(IneligibleApplicantException ex,
-                                                     HttpServletRequest request) {
-        return build(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), request);
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleValidation(MethodArgumentNotValidException ex,
                                                      HttpServletRequest request) {
