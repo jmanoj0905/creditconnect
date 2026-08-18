@@ -2,6 +2,7 @@ package com.creditconnect.controller;
 
 import com.creditconnect.dto.UserResponse;
 import com.creditconnect.exception.ResourceNotFoundException;
+import com.creditconnect.service.RepaymentService;
 import com.creditconnect.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ class UserControllerTest {
 
     @MockitoBean
     private UserService userService;
+
+    @MockitoBean
+    private RepaymentService repaymentService;
 
     @Test
     void createsUser() throws Exception {

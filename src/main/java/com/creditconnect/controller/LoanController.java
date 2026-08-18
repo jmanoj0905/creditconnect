@@ -3,7 +3,9 @@ package com.creditconnect.controller;
 import com.creditconnect.dto.LoanApplicationRequest;
 import com.creditconnect.dto.LoanApplicationResponse;
 import com.creditconnect.dto.LoanOfferResponse;
+import com.creditconnect.dto.RepaymentResponse;
 import com.creditconnect.service.LoanApplicationService;
+import com.creditconnect.service.RepaymentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,12 @@ import java.util.List;
 public class LoanController {
 
     private final LoanApplicationService loanApplicationService;
+    private final RepaymentService repaymentService;
 
-    public LoanController(LoanApplicationService loanApplicationService) {
+    public LoanController(LoanApplicationService loanApplicationService,
+                          RepaymentService repaymentService) {
         this.loanApplicationService = loanApplicationService;
+        this.repaymentService = repaymentService;
     }
 
     @PostMapping("/apply")
@@ -41,5 +46,10 @@ public class LoanController {
     @GetMapping("/{id}/offers")
     public List<LoanOfferResponse> getOffers(@PathVariable Long id) {
         return loanApplicationService.getOffers(id);
+    }
+
+    @PostMapping("/{id}/repay")
+    public RepaymentResponse repay(@PathVariable Long id) {
+        return repaymentService.repayNextInstalment(id);
     }
 }

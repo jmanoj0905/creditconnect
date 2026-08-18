@@ -1,7 +1,9 @@
 package com.creditconnect.controller;
 
 import com.creditconnect.dto.CreateUserRequest;
+import com.creditconnect.dto.LoanResponse;
 import com.creditconnect.dto.UserResponse;
+import com.creditconnect.service.RepaymentService;
 import com.creditconnect.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -13,14 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;
+    private final RepaymentService repaymentService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RepaymentService repaymentService) {
         this.userService = userService;
+        this.repaymentService = repaymentService;
     }
 
     @PostMapping
@@ -31,5 +37,11 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponse getById(@PathVariable Long id) {
         return userService.getById(id);
+    }
+
+    @GetMapping("/{id}/loans")
+    public List<LoanResponse> loans(@PathVariable Long id) {
+        userService.getById(id);
+        return repaymentService.loansForUser(id);
     }
 }
