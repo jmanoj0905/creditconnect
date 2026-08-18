@@ -1,0 +1,16 @@
+target/
+
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+.DS_Store
+
+*.log
+
+.claude/
+CLAUDE.md
+.mcp.json
+docs/superpowers/
